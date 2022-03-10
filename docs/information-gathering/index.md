@@ -26,6 +26,7 @@ Additionally, as a reference, you can review the [minimum hardware requirements]
     - Do you support static IP assignment via DHCP? 
 - Will you be able to support each of the [DNS record types used by OpenShift](https://docs.openshift.com/container-platform/latest/installing/installing_bare_metal/installing-bare-metal.html#installation-dns-user-infra_installing-bare-metal)?
 - Do you have features like VPC, subnets, and firewalls?
+- Does your platform support a metadata service running?
 - Do you have disconnected, offline, or restricted network capabilities?
 
 ## Security
