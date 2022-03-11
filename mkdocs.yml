@@ -1,0 +1,23 @@
+site_name: OpenShift Infrastructure Provider Onboarding Guide
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - yaml
+nav:
+  - 'index.md'
+  - 'overview.md'
+  - Preparation: 'preparation/index.md'
+  - 'Information Gathering': 'information-gathering/index.md'
+  - 'OpenShift Enhancement': 'openshift-enhancement/index.md'
+  - 'RHCOS': 'rhcos/index.md'
+  - 'Installer': 'installer/index.md'
+  - 'Cloud Controller Manager': 'cloud-controller-manager/index.md'
+  - 'Container Storage Interface Driver': 'container-storage-interface-driver/index.md'
+  - 'Machine API Controllers': 'machine-api-controllers/index.md'
+  - 'Network Ingress and DNS': 'network-ingress-dns/index.md'
+  - 'Continuous Integration': 'continuous-integration-and-testing/index.md'
+  - 'Component Infrastructure': 'component-infrastructure/index.md'
+  - 'Documentation': 'documentation/index.md'
+  - 'Red Hat Relationship': 'red-hat-relationship/index.md'
+  - 'Release': 'release/index.md'
