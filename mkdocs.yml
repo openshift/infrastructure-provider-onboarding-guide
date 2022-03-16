@@ -16,6 +16,7 @@ nav:
   - 'Container Storage Interface Driver': 'container-storage-interface-driver/index.md'
   - 'Machine API Controllers': 'machine-api-controllers/index.md'
   - 'Network Ingress and DNS': 'network-ingress-dns/index.md'
+  - 'Infrastructure Metadata Service': 'infrastructure-metadata-service/index.md'
   - 'Continuous Integration': 'continuous-integration-and-testing/index.md'
   - 'Component Infrastructure': 'component-infrastructure/index.md'
   - 'Documentation': 'documentation/index.md'
