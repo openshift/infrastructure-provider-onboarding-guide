@@ -1,4 +1,5 @@
 site_name: OpenShift Infrastructure Provider Onboarding Guide
+repo_url: https://github.com/openshift/infrastructure-provider-onboarding-guide
 theme:
   name: readthedocs
   highlightjs: true
