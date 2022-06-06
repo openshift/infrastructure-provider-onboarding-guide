@@ -1,4 +1,4 @@
-# OPCT User Documentation
+# OpenShift Provider Certification Tool
 
 *TODO - summary*
 
