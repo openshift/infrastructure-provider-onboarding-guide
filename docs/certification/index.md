@@ -72,7 +72,7 @@ openshift-provider-cert status -w # Keep watch open until completion
 ```
 
 
-### Submit the artifacts
+### Retrieve the results
 
 The certification results must be retrieved from the OpenShift cluster under test using:
 
