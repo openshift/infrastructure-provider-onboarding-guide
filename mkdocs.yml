@@ -21,5 +21,6 @@ nav:
   - 'Continuous Integration': 'continuous-integration-and-testing/index.md'
   - 'Component Infrastructure': 'component-infrastructure/index.md'
   - 'Documentation': 'documentation/index.md'
+  - 'Certification': 'certification/index.md'
   - 'Red Hat Relationship': 'red-hat-relationship/index.md'
   - 'Release': 'release/index.md'
