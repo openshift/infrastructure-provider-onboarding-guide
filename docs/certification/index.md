@@ -18,7 +18,9 @@ More detail on each step can be found in sections further below.
 
 A Red Hat OpenShift 4 cluster must be [installed](https://docs.openshift.com/container-platform/latest/installing/index.html) before certification can begin. The OpenShift cluster must be installed on your infrastructure as if it were a production environment. Ensure that each feature of your infrastructure you plan to support with OpenShift is configured in the cluster (e.g. Load Balancers, Storage, special hardware).
 
-Below is a table of the minimum resource requirements for the OpenShift cluster under test:
+### Standard Environment
+
+A standard machine layout can be used for certification. If you run into issues with pod disruption (eviction, OOM, frequent crashes, etc) then you may want to consider the Dedicated Test Environment configuration further below. Below is a table of the minimum resource requirements for the OpenShift cluster under test:
 
 | Machine       | Count | CPU | RAM (GB) | Storage (GB) |
 | ------------- | ----- | --- | -------- | ------------ |
@@ -28,6 +30,54 @@ Below is a table of the minimum resource requirements for the OpenShift cluster 
 
 
 *Note: These requirements are higher than the [minimum requirements](https://docs.openshift.com/container-platform/latest/installing/installing_bare_metal/installing-bare-metal.html#installation-minimum-resource-requirements_installing-bare-metal) in OpenShift product documentation due to the resource demand of the certification tests.*
+
+### Dedicated Node for Test Environment
+
+If your compute nodes are at or below minimum requirements, it is recommended to run the certification environment on one dedicated node to avoid disruption of the test scheduler. Otherwise the concurrency between resources scheduled on the cluster, e2e-test manager (aka openshift-tests-plugin), and other stacks like monitoring can disrupt the test environment, leading to unexpected results, like eviction of plugins or certification server (sonobuoy pod).
+
+See the troubleshooting section on ways to identify you might need to use a dedicated node test environment below.
+
+The dedicated node environment cluster size can be adjusted to match the table below. Note the differences in the `Dedicated Test` machine:
+
+| Machine       | Count | CPU | RAM (GB) | Storage (GB) |
+| ------------- | ----- | --- | -------- | ------------ |
+| Bootstrap     | 1     | 4   | 16       | 100          |
+| Control Plane | 3     | 4   | 16       | 100          |
+| Compute       | 3     | 4   | 16       | 100          |
+| Dedicated Test| 1     | 4   | 8        | 100          |
+
+#### Environment Setup
+
+1. Choose one node with at least 8GiB of RAM and 4 vCPU
+2. Label node with `node-role.kubernetes.io/tests=""` (certification related pods will schedule to dedicated node)
+3. Taint node with `node-role.kubernetes.io/tests="":NoSchedule` (prevent other pods from running on dedicated node)
+
+*NOTE: certification pods will automatically have node-selectors and taint tolerations if you use the `--dedicated` flag.*
+
+There are two options to accomplish this type of setup...
+
+##### Option A: Command Line 
+
+```shell
+oc label node <node_name> node-role.kubernetes.io/tests=""
+oc taint node <node_name> node-role.kubernetes.io/tests="":NoSchedule
+```
+
+##### Option B: Machine Set 
+
+If you have support for OpenShift's Machine API then you can create a new `MachineSet` to configure the labels and taints. See [OpenShift documentation](https://docs.openshift.com/container-platform/latest/machine_management/creating-infrastructure-machinesets.html#binding-infra-node-workloads-using-taints-tolerations_creating-infrastructure-machinesets) on how to configure a new `MachineSet`. Note that at time of certification testing, OpenShift's product documentation may not mention your infrastructure provider yet! 
+
+Here is a `MachineSet` YAML snippet on how to configure the label and taint as well:
+
+```yaml
+      metadata:
+        labels:
+          openshift-tests: "true"
+          node-role.kubernetes.io/tests: ""
+      taints:
+        - key: node-role.kubernetes.io/tests
+          effect: NoSchedule
+```
 
 
 ### Privilege Requirements
@@ -108,7 +158,9 @@ If you are not sure why you have failed certification or if some of the tests fa
 
 ### Troubleshooting
 
-Using the _status_ command above will provide a high level overview but more information is needed to troubleshoot a problem with the provider certification tool or why you aren’t able to pass all certification checks. A Must Gather from the cluster and Inspection of sonobuoy namespace is the best way to start troubleshooting:
+#### Information Gathering
+
+Using the _status_ command will provide a high level overview but more information is needed to troubleshoot a problem with the provider certification tool or why you aren’t able to pass all certification checks. A Must Gather from the cluster and Inspection of sonobuoy namespace is the best way to start troubleshooting:
 
 ```sh
 oc adm must-gather
@@ -116,3 +168,7 @@ oc adm inspect openshift-provider-certification
 ```
 
 Use the two archives created by the commands above to begin troubleshooting. The must gather archive provides a snapshot view into the whole cluster. The inspection archive will contain information about the sonobuoy namespace only.
+
+#### Do I Need a Dedicated Test Environment
+
+When issues like this arise, you can see error events in the `openshift-provider-certification` namespace (`oc get events -n openshift-provider-certification`) or even missing plugin pods. Also, sometimes sonobuoy does not detect the issues ([SPLAT-524](https://issues.redhat.com/browse/SPLAT-524)) and the certification environment will run until the timeout, with unexpected failures.
