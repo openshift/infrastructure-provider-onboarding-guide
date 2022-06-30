@@ -10,6 +10,13 @@ fixes and continued maintenance. In some cases, due to timing, it is possible
 that the initial work which lands in the release payload will need further
 engineering to reach the expected feature parity.
 
+If you plan on certifying OpenShift on your infrastructure provider then
+please review the
+[OpenShift Provider Certification Tool guide](https://github.com/redhat-openshift-ecosystem/provider-certification-tool/blob/main/docs/user.md)
+and share the test results with your Red Hat Partner. You should also
+receive more guidance from your Red Hat Partner regarding the certification
+process.
+
 ## Open source
 
 All components that are released by Red Hat are built using [open source][oss]
