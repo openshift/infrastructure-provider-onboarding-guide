@@ -28,7 +28,7 @@ It is important to note that you will need to be able to run multiple OpenShift 
 
 ![](running-ci-jobs-on-infra.png)
 
-In order to calculate your infrastructure size and costs, use this [OpenShift Minimum Hardware Requirements document.](https://docs.openshift.com/container-platform/4.9/installing/installing_bare_metal/installing-bare-metal.html#minimum-resource-requirements_installing-bare-metal)
+In order to calculate your infrastructure size and costs, use this [OpenShift Minimum Hardware Requirements document.](https://docs.openshift.com/container-platform/latest/installing/installing_bare_metal/installing-bare-metal.html#minimum-resource-requirements_installing-bare-metal)
 
 
 ## Red Hat's Infrastructure
