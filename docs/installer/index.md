@@ -63,7 +63,7 @@ Add in-repo documentation, ideally following the general format of other platfor
 [install-config]: https://github.com/openshift/installer/blob/master/docs/user/customization.md
 [upi]: https://github.com/openshift/installer/tree/master/upi
 [overview]: https://github.com/openshift/installer/blob/master/docs/user/overview.md
-[arch]: https://docs.openshift.com/container-platform/4.8/architecture/architecture-installation.html
+[arch]: https://docs.openshift.com/container-platform/latest/architecture/architecture-installation.html
 [contributing]: https://github.com/openshift/installer/blob/master/CONTRIBUTING.md
 [types]: https://github.com/openshift/installer/commit/590dc0c62d432d4d3ea1ca40aa84ba6f17bee780#diff-5dc50083bb8d12ad7439e48e73af24cc866f5fb59322144805cba65a8abdefc7
 [explain]: https://github.com/openshift/installer/blob/master/docs/dev/explain.md
