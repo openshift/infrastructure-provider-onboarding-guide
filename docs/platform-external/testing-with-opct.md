@@ -1,0 +1,74 @@
+# Conformance testing with OPCT
+
+After the OpenShift/OKD has been installed, you want to run OpeNShift conformance
+tests (e2e) to validate OpenShift core components.
+
+The Continuous Integration (CI) testing for OpenShift and its supported infrastructure providers is handled through Prow; the same system used for the Kubernetes project. You can read more in the guide for [Continuous Integration and Testing](../continuous-integration-and-testing).
+
+For non-integrated providers, or when the provider is looking to run a small set of tests,
+it is possible to achieve this with the following tools:
+
+- `openshift-tests`: the utility implements several extended conformance suites (e2e) for OpenShift.
+- `opct`: [OpenShift/OKD Provider Compatibility Tool](https://redhat-openshift-ecosystem.github.io/provider-certification-tool/) orchestrate a set of kubernetes and OpenShift conformance suite in a target installation, providing summarized feedback of the execution, and results of several checks for the expected behavior for production-ready clusters while the tests have been executed. OPCT uses `openshift-tests` as an engine of test suites, and [Sonobuoy](https://sonobuoy.io/) as an orchestrator.
+
+This guide explores how to run a conformance workflow with OPCT.
+
+## OPCT Summary
+
+The OPCT is an option when the provider does not have integration with OpenShift CI and wants to get quick feedback about conformance execution in their infrastructure.
+
+The tool allows to orchestration of conformance test suites used in OpenShift CI in
+custom installations using [OpenShift Provider Compatibility Tool (OPCT)](https://redhat-openshift-ecosystem.github.io/provider-certification-tool/user/), providing signals of the custom installations is passing on the e2e tests required for a healthy OpenShift installation.
+
+OPCT orchestrates a single workflow with the following steps:
+
+- conformance tests for upgrade: when enabled, it runs an upgrade to the target release with a couple of tests monitoring the upgrade
+- kubernetes conformance suite: the standard kubernetes conformance suite
+- openshift conformance suite: the `openshift/conformance` suite
+- artifacts collector: collect data must-gather, disk performance, Prometheus metrics, etc
+
+There are variants like disconnected, ARM, upgrades, etc which are not covered by this guide.
+
+## Prerequisites
+
+- [opct installed][opct-install]
+- KUBECONFIG environment variable exported
+- Persistent storage for image registry. [Here][image-registry-storage-bm] is an example used by Bare Metal.
+- [A dedicated node created for the test environment](https://redhat-openshift-ecosystem.github.io/provider-certification-tool/user/#standard-env-setup-node)
+
+[opct-install]: https://redhat-openshift-ecosystem.github.io/provider-certification-tool/user/#install
+[image-registry-storage-bm]: https://docs.openshift.com/container-platform/4.13/registry/configuring_registry_storage/configuring-registry-storage-baremetal.html
+
+## Running the regular the flow
+
+- Start the tests
+
+```sh
+opct run --watch
+```
+
+- Collect the results
+
+```sh
+opct retrieve
+```
+
+- Review the results
+
+```sh
+opct report artifact.tar.gz
+```
+
+- Extended report: HTML report will be created with details to drill down into the results
+
+```sh
+opct report artifact.tar.gz --savel-to /tmp/results --loglevel debug
+```
+
+For more details, read the documentation.
+
+## Destroying the environment
+
+```sh
+opct destroy
+```
