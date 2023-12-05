@@ -28,4 +28,3 @@ To begin learning about the process, we are providing the following pages to ach
 
 - [Installing a Platform External OpenShift cluster](./installing.md): A generic
   guide exploring the components and steps to provision an OpenShift cluster
-- [Use Case: Installing an OpenShift cluster in Oracle Cloud Infrastructure](./use-case-oci-upi.md)

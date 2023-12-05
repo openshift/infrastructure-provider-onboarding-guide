@@ -563,5 +563,4 @@ Wait for the installation to be completed:
 ## Next steps
 
 - [Validating an installation](https://docs.openshift.com/container-platform/4.13/installing/validating-an-installation.html#validating-an-installation)
-- [Check the use case of deploying OpenShift cluster on Oracle Cloud Infrastructure](./use-case-oci-upi.md)
-- [Running conformance tests in non-integrated providers](./conformance-tests-opct.md)
+- [Running conformance tests in non-integrated providers](./e2e-testing.md)

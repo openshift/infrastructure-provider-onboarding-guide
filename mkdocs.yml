@@ -35,5 +35,4 @@ nav:
   - Platform External:
     - platform-external/index.md
     - platform-external/installing.md
-    - Use case of installing a cluster with platform external type in OCI: platform-external/use-case-oci-upi.md
-    - platform-external/testing-with-opct.md
+    - platform-external/e2e-testing.md

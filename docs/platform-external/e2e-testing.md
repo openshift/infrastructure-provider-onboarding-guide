@@ -1,4 +1,4 @@
-# Conformance testing with OPCT
+# Conformance tests
 
 After the OpenShift/OKD has been installed, you want to run OpeNShift conformance
 tests (e2e) to validate OpenShift core components.
@@ -13,7 +13,44 @@ it is possible to achieve this with the following tools:
 
 This guide explores how to run a conformance workflow with OPCT.
 
-## OPCT Summary
+## openshift-tests utility
+
+The `openshift-tests` utility is used to run the end-to-end (e2e) tests on OpenShift, the utility implement all the tests and suites, a group e2e tests with a similar pourpose. The `openshift/conformance` suite will be used to validate a cluster.
+
+### Prerequisites
+
+Install the utility by extracting from the release image:
+
+```sh
+export VERSION=${CLUSTER_VERSION:-4.14.0}
+oc adm release extract \
+    --tools quay.io/openshift-release-dev/ocp-release:${VERSION}-x86_64 \
+    -a ${PULL_SECRET_FILE}
+
+tar xvfz openshift-install-linux-${VERSION}.tar.gz
+RELEASE_IMAGE=$(./openshift-install version | awk '/release image/ {print $3}')
+TESTS_IMAGE=$(oc adm release info --image-for='tests' $RELEASE_IMAGE)
+oc image extract $TESTS_IMAGE \
+    --file="/usr/bin/openshift-tests" \
+    -a ${PULL_SECRET_FILE}
+chmod u+x ./openshift-tests
+```
+
+where:
+
+- `PULL_SECRET_FILE` is the registry credentials used to pull container images from repository.
+
+### Running the OpenShift conformance suite
+
+- Run the utility:
+
+```sh
+openshift-tests run openshift/conformance --junit-dir /tmp/results
+```
+
+The results are available in `/tmp/results` directory
+
+## opct utility
 
 The OPCT is an option when the provider does not have integration with OpenShift CI and wants to get quick feedback about conformance execution in their infrastructure.
 
@@ -29,7 +66,7 @@ OPCT orchestrates a single workflow with the following steps:
 
 There are variants like disconnected, ARM, upgrades, etc which are not covered by this guide.
 
-## Prerequisites
+### Prerequisites
 
 - [opct installed][opct-install]
 - KUBECONFIG environment variable exported
@@ -39,7 +76,7 @@ There are variants like disconnected, ARM, upgrades, etc which are not covered b
 [opct-install]: https://redhat-openshift-ecosystem.github.io/provider-certification-tool/user/#install
 [image-registry-storage-bm]: https://docs.openshift.com/container-platform/4.13/registry/configuring_registry_storage/configuring-registry-storage-baremetal.html
 
-## Running the regular the flow
+### Running the conformance suites
 
 - Start the tests
 
@@ -59,7 +96,7 @@ opct retrieve
 opct report artifact.tar.gz
 ```
 
-- Extended report: HTML report will be created with details to drill down into the results
+- Extended report: An HTML report will be created with details to drill down into the results
 
 ```sh
 opct report artifact.tar.gz --savel-to /tmp/results --loglevel debug
@@ -67,7 +104,7 @@ opct report artifact.tar.gz --savel-to /tmp/results --loglevel debug
 
 For more details, read the documentation.
 
-## Destroying the environment
+### Destroying the environment
 
 ```sh
 opct destroy
