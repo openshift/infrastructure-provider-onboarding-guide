@@ -1,6 +1,6 @@
 # Conformance tests
 
-After the OpenShift/OKD has been installed, you want to run OpeNShift conformance
+After the OpenShift/OKD cluster has been installed, you want to run OpenShift conformance
 tests (e2e) to validate OpenShift core components.
 
 The Continuous Integration (CI) testing for OpenShift and its supported infrastructure providers is handled through Prow; the same system used for the Kubernetes project. You can read more in the guide for [Continuous Integration and Testing](../continuous-integration-and-testing).
@@ -15,7 +15,7 @@ This guide explores how to run a conformance workflow with OPCT.
 
 ## openshift-tests utility
 
-The `openshift-tests` utility is used to run the end-to-end (e2e) tests on OpenShift, the utility implement all the tests and suites, a group e2e tests with a similar pourpose. The `openshift/conformance` suite will be used to validate a cluster.
+The `openshift-tests` utility is used to run the end-to-end (e2e) tests on OpenShift. The utility implements all the tests and suites, and groups e2e tests with a similar purpose. The `openshift/conformance` suite will be used to validate a cluster.
 
 ### Prerequisites
 
@@ -50,7 +50,7 @@ openshift-tests run openshift/conformance --junit-dir /tmp/results
 
 The results are available in `/tmp/results` directory
 
-## opct utility
+## OPCT utility
 
 The OPCT is an option when the provider does not have integration with OpenShift CI and wants to get quick feedback about conformance execution in their infrastructure.
 

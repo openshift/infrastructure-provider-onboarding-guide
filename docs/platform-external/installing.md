@@ -250,7 +250,7 @@ infrastructure in integrated providers using the IPI (Installer-Provisioned
 Infrastructure) method, the external platform does not provide any automation
 developed to create the infrastructure.
 
-The `openshift-install` uses Terraform or cloud provider Go SDK as a backend on
+The `openshift-install` uses compiled-in SDKs to automatically create cloud resources on supported IPI platforms and form them into a new cluster.
 supported platforms to automatically create cloud resources and form them
 into a new cluster. In certain situations, such as when preparing an external platform
 cluster, the resource creation needs to be customized and provided by the end-user,
