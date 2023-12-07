@@ -38,7 +38,7 @@ chmod u+x ./openshift-tests
 
 where:
 
-- `PULL_SECRET_FILE` is the registry credentials used to pull container images from repository.
+- `PULL_SECRET_FILE` is the registry credentials used to pull container images from the repository.
 
 ### Running the OpenShift conformance suite
 
@@ -65,6 +65,8 @@ OPCT orchestrates a single workflow with the following steps:
 - artifacts collector: collect data must-gather, disk performance, Prometheus metrics, etc
 
 There are variants like disconnected, ARM, upgrades, etc which are not covered by this guide.
+To learn more about the variants, take a look at the OpenShift documentation page
+["Installation Overview"](https://docs.openshift.com/container-platform/latest/installing/).
 
 ### Prerequisites
 
@@ -99,7 +101,7 @@ opct report artifact.tar.gz
 - Extended report: An HTML report will be created with details to drill down into the results
 
 ```sh
-opct report artifact.tar.gz --savel-to /tmp/results --loglevel debug
+opct report artifact.tar.gz --save-to /tmp/results --loglevel debug
 ```
 
 For more details, read the documentation.

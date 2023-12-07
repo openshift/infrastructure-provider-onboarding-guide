@@ -4,9 +4,9 @@ The steps to install an OpenShift cluster with a platform type external inherits
 the guidance and infrastructure requirements of the "agnostic installation"
 method from the official documentation ["Installing a cluster on any platform"](https://docs.openshift.com/container-platform/4.13/installing/installing_platform_agnostic/installing-platform-agnostic.html).
 
-This method is a fully customized path, allowing the user to deploy
-a cluster to use any automation they want, including the provider's specific, such as network components,
-required to deploy an OpenShift cluster.
+This method is a fully customized path, allowing the users to config
+a cluster using `openshift-installer`, creating the infrastructure using
+any automation they wanted to provision resources required to install an OpenShift cluster.
 
 There are other methods and tools than using `openshift-installer` to deploy a
 provider-agnostic cluster, such as the Assisted Installer, which is not covered by this guide.
@@ -22,8 +22,8 @@ This guide is organized into three sections:
   OpenShift configuration files and specific customizations for platform type
   `External`.
 - Section 2 - Infrastructure provisioning: the section describes how to consume
-  the configuration files, with an overview of the User-Provided Infrastructure (UPI)
-  installation method used by installations in non-integrated providers.
+  the configuration files, with an overview of the agnostic installation method
+  used by deployments in non-integrated providers.
 - Section 3 - Setup Cloud Controller Manager (CCM): the section describes how to
   create the required cloud provider resources when opted into it in the bootstrap
   stage.
@@ -58,13 +58,20 @@ platform external type using fully customized automation.
 
 ## Prerequisites
 
-### Clients
+Clients:
 
-The OpenShift client (`oc`) and Installer (`openshift-install`) must be
-downloaded, read the steps described in
-["Obtaining the installation program"](https://docs.openshift.com/container-platform/4.13/installing/installing_platform_agnostic/installing-platform-agnostic.html).
+- The OpenShift client (`oc`) and Installer (`openshift-install`) must be downloaded,
+  please read the steps described in [Obtaining the installation program][installing-cli].
 
-The credentials to pull OpenShift images, also known as "Pull Secret", needs
+- The Butane utility (`butane`) must be installed to manipulate Machine Configs. Please
+  read the steps described in [Installing Butane][installing-butane]
+
+[installing-cli]: https://docs.openshift.com/container-platform/latest/installing/installing_platform_agnostic/installing-platform-agnostic.html
+[installing-butane]: https://docs.openshift.com/container-platform/latest/installing/install_config/installing-customizing.html#installation-special-config-butane-install_installing-customizing
+
+Credentials:
+
+- The credentials to pull OpenShift images from the container registry, also known as "Pull Secret", needs
 to be obtained from the [Red Hat Hybrid Cloud Console](https://console.redhat.com/openshift).
 
 ## Section 1. Setup OpenShift configuration
@@ -79,15 +86,20 @@ configuration files.
 
 Follow the steps to [Manually create the installation configuration file](install-config),
 customizing the `platform` object, setting the type to `external`, and the
-`platformName` to the cloud provider's name:
+`platformName` to the cloud provider's name.
 
+The value of `platformName` holds the arbitrary string representing the infrastructure
+provider name, expected to be set at the installation time. This field is solely for
+informational and reporting purposes and is not expected to be used for decision-making.
+
+- Example of platform type external in `install-config.yaml`:
 ```yaml
 platform:
   external:
-    platformName: "providerName"
+    platformName: "myCloud"
 ```
 
-[install-config]: https://docs.openshift.com/container-platform/4.13/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-initializing-manual_installing-platform-agnostic
+[install-config]: https://docs.openshift.com/container-platform/latest/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-initializing-manual_installing-platform-agnostic
 
 ### Create manifests
 
@@ -117,7 +129,7 @@ the parent -->
 
 #### Patch the Infrastructure Object (optional)
 
-The cluster cloud controller manager operator reads the state of platform external
+The cluster cloud controller manager operator reads the state of the platform external
 deployment in the `Infrastructure` custom resource object when the value
 of `.status.platformStatus.external.cloudControllerManager.state` is set to
 `External`, the `--cloud-provider` flag will be set to `External` in the Kubelet
@@ -239,7 +251,8 @@ The files with the extension `.ign` will be generated as the example below:
 
 ## Section 2. Create Infrastructure resources
 
-Several types of infrastructure need to be created including compute nodes, storage, and networks.
+Several types of infrastructure need to be created including compute nodes,
+storage, and networks.
 
 This section describes how to integrate those resources into the OpenShift
 installation process, and assumes that the entire process of creating the
@@ -247,23 +260,19 @@ infrastructure will be automated by the partner to be consumed by the end-users.
 
 In OpenShift, the `openshift-install` binary is responsible for provisioning the
 infrastructure in integrated providers using the IPI (Installer-Provisioned
-Infrastructure) method, the external platform does not provide any automation
-developed to create the infrastructure.
-
-The `openshift-install` uses compiled-in SDKs to automatically create cloud resources on supported IPI platforms and form them into a new cluster.
-supported platforms to automatically create cloud resources and form them
-into a new cluster. In certain situations, such as when preparing an external platform
-cluster, the resource creation needs to be customized and provided by the end-user,
-the OpenShift installer named this method as UPI (User-Provided Infrastructure).
+Infrastructure) method, it uses compiled-in SDKs to automate the cloud resources
+creation on supported IPI platforms and form them into a new cluster.
+In the external platform deployments, automation is not available.
 
 The following examples show how to customize and automate the infrastructure creation
-provided in the installer repository for integrated platforms:
+without `openshift-install` automation (non-IPI), allowing highly-customized infrastructure
+deployments by the end-user:
 
 - [AWS CloudFormation Templates](https://github.com/openshift/installer/tree/master/upi/aws/cloudformation) for [AWS UPI](https://docs.openshift.com/container-platform/4.13/installing/installing_aws/installing-aws-user-infra.html)
 - [Azure ARM Templates](https://github.com/openshift/installer/tree/master/upi/azure) for [Azure UPI](https://docs.openshift.com/container-platform/4.13/installing/installing_azure/installing-azure-user-infra.html)
 - [Ansible Playbooks](https://github.com/openshift/installer/tree/master/upi/openstack) for [OpenStack UPI](https://docs.openshift.com/container-platform/4.13/installing/installing_openstack/installing-openstack-user-kuryr.html)
 
-The following sub-section provides guidance referencing the OpenShift documentation
+The following sub-sections provide guidance referencing the OpenShift documentation
 for the infrastructure components required to deploy a cluster.
 
 ### Identity
@@ -286,7 +295,7 @@ See the [Networking requirements for user-provisioned infrastructure](https://do
 for details of the deployment requirements for OpenShift.
 
 In production environments, it is recommended to deploy OpenShift control plane nodes
-within the same geographical location (regions) distributing in more than one isolated
+within the same geographical location (regions) distributed in more than one isolated
 location or data centers (also known as zones, when available), which some cloud providers
 refer to as zones and/or fault domains.
 The most important goal is to increase the availability and redundancy of the control
@@ -369,7 +378,7 @@ the OpenShift Container Platform control plane.
 The `bootstrap.ign` must be used to create the bootstrap node. Most of the cloud
 providers have size limits in the user data, so you must store the `bootstrap.ign`
 externally, then retrieve it in the boot process. If the cloud provider
-offer a blob service allowing the creation of a signed HTTPS URL,
+offers a blob service allowing the creation of a signed HTTPS URL,
 it can be used to store and serve the ignition file for bootstrap.
 
 The following example is an ignition file which can be used to fetch a remote ignition
@@ -623,11 +632,11 @@ oc create -f ccm/*.yaml
 
 ## Review the installation
 
-This section describes useful commands to follow up the installation progress.
+This section describes useful commands to follow up on the installation progress.
 
 After the OpenShift configuration, infrastructure and CCM is deployed (when required).
 
-Export the `KUBECONFIG` environment, if was not yet exported in the Section 3:
+Export the `KUBECONFIG` environment, only if it was not yet exported in Section 3:
 
 ```sh
 export KUBECONFIG=$INSTALL_DIR/auth/kubeconfig
