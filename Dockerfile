@@ -1,6 +1,7 @@
 FROM registry.access.redhat.com/ubi8/ubi AS builder
 
-RUN yum -y install python3 && pip3 install mkdocs
+RUN yum -y install python3 \
+  && pip3 install mkdocs pymdown-extensions
 
 COPY . /opt
 WORKDIR /opt
