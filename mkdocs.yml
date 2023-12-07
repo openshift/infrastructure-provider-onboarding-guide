@@ -6,21 +6,33 @@ theme:
   highlightjs: true
   hljs_languages:
     - yaml
+
+markdown_extensions:
+  # To provide Note blocks (note, tip, warning)
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
 nav:
-  - 'index.md'
-  - 'overview.md'
-  - Preparation: 'preparation/index.md'
-  - 'Information Gathering': 'information-gathering/index.md'
-  - 'OpenShift Enhancement': 'openshift-enhancement/index.md'
-  - 'RHCOS': 'rhcos/index.md'
-  - 'Installer': 'installer/index.md'
-  - 'Cloud Controller Manager': 'cloud-controller-manager/index.md'
-  - 'Container Storage Interface Driver': 'container-storage-interface-driver/index.md'
-  - 'Machine API Controllers': 'machine-api-controllers/index.md'
-  - 'Network Ingress and DNS': 'network-ingress-dns/index.md'
-  - 'Infrastructure Metadata Service': 'infrastructure-metadata-service/index.md'
-  - 'Continuous Integration': 'continuous-integration-and-testing/index.md'
-  - 'Component Infrastructure': 'component-infrastructure/index.md'
-  - 'Documentation': 'documentation/index.md'
-  - 'Red Hat Relationship': 'red-hat-relationship/index.md'
-  - 'Release': 'release/index.md'
+  - Welcome: index.md
+  - Full integration:
+    - 'overview.md'
+    - Preparation: 'preparation/index.md'
+    - 'Information Gathering': 'information-gathering/index.md'
+    - 'OpenShift Enhancement': 'openshift-enhancement/index.md'
+    - 'RHCOS': 'rhcos/index.md'
+    - 'Installer': 'installer/index.md'
+    - 'Cloud Controller Manager': 'cloud-controller-manager/index.md'
+    - 'Container Storage Interface Driver': 'container-storage-interface-driver/index.md'
+    - 'Machine API Controllers': 'machine-api-controllers/index.md'
+    - 'Network Ingress and DNS': 'network-ingress-dns/index.md'
+    - 'Infrastructure Metadata Service': 'infrastructure-metadata-service/index.md'
+    - 'Continuous Integration': 'continuous-integration-and-testing/index.md'
+    - 'Component Infrastructure': 'component-infrastructure/index.md'
+    - 'Documentation': 'documentation/index.md'
+    - 'Red Hat Relationship': 'red-hat-relationship/index.md'
+    - 'Release': 'release/index.md'
+  - Platform External:
+    - platform-external/index.md
+    - platform-external/installing.md
+    - platform-external/e2e-testing.md
