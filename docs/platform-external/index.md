@@ -17,7 +17,7 @@ to external cloud providers too. You can read more about this in the
 [Kubernetes blog](https://kubernetes.io/blog/2019/04/17/the-future-of-cloud-providers-in-kubernetes/)
 and the [Kubernetes documentation](https://kubernetes.io/docs/concepts/architecture/cloud-controller/).
 
-To signalize the use of external cloud providers' components, like Cloud Controller Manager, OpenShift provides
+To signal the use of a cloud provider's Cloud Controller Manager, OpenShift provides
 a mechanism to set the `--cloud-provider` flag to `external` on Kubernetes components (Kubelet and Kube Controller
 Manager) when using the platform type `External`. This mechanism must be activated in the installer option
 `platform.external.cloudControllerManager` with value of `External` on `install-config.yaml`.
