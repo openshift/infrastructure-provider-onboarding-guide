@@ -85,18 +85,39 @@ configuration files.
 ### Create the install-config.yaml
 
 Follow the steps to [Manually create the installation configuration file](install-config),
-customizing the `platform` object, setting the type to `external`, and the
-`platformName` to the cloud provider's name.
+customizing the `platform` object, setting the type to `external`, and the customized fields:
 
-The value of `platformName` holds the arbitrary string representing the infrastructure
-provider name, expected to be set at the installation time. This field is solely for
-informational and reporting purposes and is not expected to be used for decision-making.
+- `platform.external.platformName` holds the arbitrary string representing the infrastructure
+  provider name, expected to be set at the installation time. This field is solely for
+  informational and reporting purposes and is not expected to be used for decision-making.
+- `platform.external.cloudControllerManager` when set to `External`, this property will enable an
+  external cloud provider. Default: "" (empty/None).
 
-- Example of platform type external in `install-config.yaml`:
+!!! info "`.platform.external.cloudControllerManager`"
+    The cluster cloud controller manager operator reads the state of the platform external
+    deployment in the `Infrastructure` custom resource object when the value
+    of `.status.platformStatus.external.cloudControllerManager.state` is set to
+    `External`, the `--cloud-provider` flag will be set to `External` in the Kubelet
+    and Kubernetes API Server, the nodes will also wait to be initialized by the
+    cloud provider CCM.
+
+Examples of `install-config.yaml` using platform external:
+
+- Default configuration without customizations:
+
 ```yaml
 platform:
   external:
-    platformName: "myCloud"
+    platformName: myCloud
+```
+
+- Signalizing that an external CCM will be supplied:
+
+```yaml
+platform:
+  external:
+    platformName: myCloud
+    cloudControllerManager: External
 ```
 
 [install-config]: https://docs.openshift.com/container-platform/latest/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-initializing-manual_installing-platform-agnostic
@@ -114,38 +135,11 @@ The `install-config.yaml` will be consumed, then the `openshift/` and
 
 The following steps describe how to customize the OpenShift installation.
 
-#### Customize manifest for CCM (optional)
-
-The steps are required when you are planning to deploy Cloud Controller Manager in Section 3.
-
-When the objective is to install an OpenShift cluster with a provider's Cloud
-Controller Manager, the Infrastructure object and Kubelet must be set in the
-configuration stage.
-
-<!-- TODO/fix: the left nav menu in the rendered page does not support 5th level
-of nested sections, impacting the navigation. The two next sections are a
-sub-section of "Customize manifest for CCM", but was left in the same level as
-the parent -->
-
-#### Patch the Infrastructure Object (optional)
-
-The cluster cloud controller manager operator reads the state of the platform external
-deployment in the `Infrastructure` custom resource object when the value
-of `.status.platformStatus.external.cloudControllerManager.state` is set to
-`External`, the `--cloud-provider` flag will be set to `External` in the Kubelet
-and Kubernetes API Server, the nodes will also wait to be initialized by the
-cloud provider CCM.
-
-The following command patch the value from `None` (default) to `External`:
-
-> The [`yq` tool](https://mikefarah.gitbook.io/yq/) version 4.x is used to manipulate YAML files.
-
-```sh
-yq ea -i '.status.platformStatus.external.cloudControllerManager.state="External"' \
-    manifests/cluster-infrastructure-02-config.yml
-```
-
 #### Create MachineConfig for Kubelet Provider ID (optional)
+
+This step **is required when you are planning to deploy Cloud Controller Manager in Section 3**,
+where the objective is to install an OpenShift cluster with a provider's Cloud
+Controller Manager, the Kubelet must be set in the configuration stage.
 
 The [kubelet service](https://github.com/openshift/machine-config-operator/blob/master/templates/worker/01-worker-kubelet/_base/units/kubelet.service.yaml)
 is started with the flags `--cloud-provider=external` and `--provider-id=${KUBELET_PROVIDERID}`,
