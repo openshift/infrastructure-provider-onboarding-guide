@@ -15,6 +15,10 @@ markdown_extensions:
 
 nav:
   - Welcome: index.md
+  - Platform External:
+    - platform-external/index.md
+    - platform-external/installing.md
+    - platform-external/e2e-testing.md
   - Full integration:
     - 'overview.md'
     - Preparation: 'preparation/index.md'
@@ -32,7 +36,3 @@ nav:
     - 'Documentation': 'documentation/index.md'
     - 'Red Hat Relationship': 'red-hat-relationship/index.md'
     - 'Release': 'release/index.md'
-  - Platform External:
-    - platform-external/index.md
-    - platform-external/installing.md
-    - platform-external/e2e-testing.md
