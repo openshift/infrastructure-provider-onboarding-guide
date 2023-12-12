@@ -137,7 +137,7 @@ The following steps describe how to customize the OpenShift installation.
 
 #### Create MachineConfig for Kubelet Provider ID (optional)
 
-This step **is required when you are planning to deploy Cloud Controller Manager in Section 3**,
+This step **is required when you are planning to deploy a Cloud Controller Manager in Section 3**,
 where the objective is to install an OpenShift cluster with a provider's Cloud
 Controller Manager, the Kubelet must be set in the configuration stage.
 
