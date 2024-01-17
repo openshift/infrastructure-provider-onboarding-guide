@@ -43,7 +43,7 @@ In each of the sections below, the outbound links contain examples of the code c
 
 ### Create Cluster Profile
 
-Creating your Cluster Profile for OpenShift's CI is a major stepping stone to running CI jobs. Details on how to do this can be found here: https://docs.ci.openshift.org/docs/how-tos/adding-a-cluster-profile/. Red Hat will work with you to complete each of the steps since they will require review and code merges into the OpenShift CI system.
+Creating your Cluster Profile for OpenShift's CI is a major stepping stone to running CI jobs. Details on how to do this can be found [here](https://docs.ci.openshift.org/docs/how-tos/adding-a-cluster-profile/). Red Hat will work with you to complete each of the steps since they will require review and code merges into the OpenShift CI system.
 
 Note that in the [Providing Credentials](https://docs.ci.openshift.org/docs/how-tos/adding-a-cluster-profile/#providing-credentials) step, you should work with Red Hat on how to access the Vault used for OpenShift CI. 
 
