@@ -1,11 +1,11 @@
-FROM registry.access.redhat.com/ubi8/ubi AS builder
-
-RUN yum -y install python3 \
-  && pip3 install mkdocs pymdown-extensions
+FROM registry.access.redhat.com/ubi9/ubi AS builder
 
 COPY . /opt
 WORKDIR /opt
-RUN mkdocs build
+
+RUN yum -y install python3 python3-pip \
+    && pip install -r requirements.txt \
+    && mkdocs build
 
 FROM registry.access.redhat.com/ubi8/ubi
 RUN yum -y install python3 && pip3 install twisted
