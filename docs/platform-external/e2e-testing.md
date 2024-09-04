@@ -22,17 +22,14 @@ The `openshift-tests` utility is used to run the end-to-end (e2e) tests on OpenS
 Install the utility by extracting from the release image:
 
 ```sh
-export VERSION=${CLUSTER_VERSION:-4.14.0}
-oc adm release extract \
-    --tools quay.io/openshift-release-dev/ocp-release:${VERSION}-x86_64 \
-    -a ${PULL_SECRET_FILE}
+PULL_SECRET_FILE=path/to/pull-secret.json
+VERSION=${CLUSTER_VERSION:-4.17.0-rc.1}
+ARCH=x86_64
+TESTS_IMAGE=$(oc adm release info --image-for=tests -a ${PULL_SECRET_FILE} \
+    quay.io/openshift-release-dev/ocp-release:${VERSION}-${ARCH})
 
-tar xvfz openshift-install-linux-${VERSION}.tar.gz
-RELEASE_IMAGE=$(./openshift-install version | awk '/release image/ {print $3}')
-TESTS_IMAGE=$(oc adm release info --image-for='tests' $RELEASE_IMAGE)
-oc image extract $TESTS_IMAGE \
-    --file="/usr/bin/openshift-tests" \
-    -a ${PULL_SECRET_FILE}
+oc image extract $TESTS_IMAGE -a ${PULL_SECRET_FILE} \
+    --file="/usr/bin/openshift-tests"
 chmod u+x ./openshift-tests
 ```
 
