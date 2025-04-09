@@ -9,7 +9,7 @@ For non-integrated providers, or when the provider is looking to run a small set
 it is possible to achieve this with the following tools:
 
 - `openshift-tests`: the utility implements several extended conformance suites (e2e) for OpenShift.
-- `opct`: [OpenShift/OKD Provider Compatibility Tool](https://redhat-openshift-ecosystem.github.io/provider-certification-tool/) orchestrate a set of kubernetes and OpenShift conformance suite in a target installation, providing summarized feedback of the execution, and results of several checks for the expected behavior for production-ready clusters while the tests have been executed. OPCT uses `openshift-tests` as an engine of test suites, and [Sonobuoy](https://sonobuoy.io/) as an orchestrator.
+- `opct`: [OpenShift/OKD Provider Compatibility Tool](https://github.com/redhat-openshift-ecosystem/opct) orchestrate a set of kubernetes and OpenShift conformance suite in a target installation, providing summarized feedback of the execution, and results of several checks for the expected behavior for production-ready clusters while the tests have been executed. OPCT uses `openshift-tests` as an engine of test suites, and [Sonobuoy](https://sonobuoy.io/) as an orchestrator.
 
 This guide explores how to run a conformance workflow with OPCT.
 
@@ -52,7 +52,7 @@ The results are available in `/tmp/results` directory
 The OPCT is an option when the provider does not have integration with OpenShift CI and wants to get quick feedback about conformance execution in their infrastructure.
 
 The tool allows to orchestration of conformance test suites used in OpenShift CI in
-custom installations using [OpenShift Provider Compatibility Tool (OPCT)](https://redhat-openshift-ecosystem.github.io/provider-certification-tool/user/), providing signals of the custom installations is passing on the e2e tests required for a healthy OpenShift installation.
+custom installations using [OpenShift Provider Compatibility Tool (OPCT)](https://github.com/redhat-openshift-ecosystem/opct), providing signals of the custom installations is passing on the e2e tests required for a healthy OpenShift installation.
 
 OPCT orchestrates a single workflow with the following steps:
 
@@ -70,9 +70,9 @@ To learn more about the variants, take a look at the OpenShift documentation pag
 - [opct installed][opct-install]
 - KUBECONFIG environment variable exported
 - Persistent storage for image registry. [Here][image-registry-storage-bm] is an example used by Bare Metal.
-- [A dedicated node created for the test environment](https://redhat-openshift-ecosystem.github.io/provider-certification-tool/user/#standard-env-setup-node)
+- [A dedicated node created for the test environment](https://redhat-openshift-ecosystem.github.io/opct/guides/cluster-validation/#standard-env-setup-node)
 
-[opct-install]: https://redhat-openshift-ecosystem.github.io/provider-certification-tool/user/#install
+[opct-install]: https://redhat-openshift-ecosystem.github.io/opct/guides/cluster-validation/#install
 [image-registry-storage-bm]: https://docs.openshift.com/container-platform/4.13/registry/configuring_registry_storage/configuring-registry-storage-baremetal.html
 
 ### Running the conformance suites
