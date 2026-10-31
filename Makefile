@@ -10,11 +10,11 @@ install: venv
 
 .PHONY: build
 build:
-	$(VENV)/bin/mkdocs build
+	mkdocs build
 
 .PHONY: serve
 serve:
-	$(VENV)/bin/mkdocs serve
+	mkdocs serve
 
 .PHONY: all
 all: install build
