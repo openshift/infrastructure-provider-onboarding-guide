@@ -17,15 +17,13 @@ to external cloud providers too. You can read more about this in the
 [Kubernetes blog](https://kubernetes.io/blog/2019/04/17/the-future-of-cloud-providers-in-kubernetes/)
 and the [Kubernetes documentation](https://kubernetes.io/docs/concepts/architecture/cloud-controller/).
 
-To signal the use of a cloud provider's Cloud Controller Manager, OpenShift provides
-a mechanism to set the `--cloud-provider` flag to `external` on Kubernetes components (Kubelet and Kube Controller
-Manager) when using the platform type `External`. This mechanism must be activated in the installer option
-`platform.external.cloudControllerManager` with value of `External` on `install-config.yaml`.
-
 To learn more about the feature, we encourage you to read the OpenShift Enhancement Proposal
 ["Introduce new platform type `External` in the OpenShift specific Infrastructure resource"](https://github.com/openshift/enhancements/blob/master/enhancements/cloud-integration/infrastructure-external-platform-type.md).
 
 To begin learning about the process, we are providing the following pages to achieve your goal:
 
-- [Installing a Platform External OpenShift cluster](./installing.md): A generic
+- [OpenShift components using platform type `External`](./components.md): A list of OpenShift components which is natively integrated with OpenShift platform type `External`.
+- [Installing a Platform External OpenShift cluster](./installing/agnostic.md): A generic
   guide exploring the components and steps to provision an OpenShift cluster
+- [Installing a Platform External OpenShift cluster with CAPI](./installing/capi.md):A generic guide exploring how to enhance from UPI method to Cluster API/CAPI provider implementation to manage the infrastructure required to install OpenShift on your provider.
+- [Installing a Platform External OpenShift cluster on AWS with CAPI](./installing/capi-ref-image-aws.md): A reference implementation of an OpenShift cluster installation using platform type `External` with Cluster API AWS (CAPA) provider implementation to provision cluster infrastructure resources.
