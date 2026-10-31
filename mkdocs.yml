@@ -23,6 +23,7 @@ nav:
       - platform-external/installing/capi-ref-image-aws.md
     - platform-external/components.md
     - platform-external/e2e-testing.md
+    - platform-external/troubleshooting.md
   - Full integration:
     - 'overview.md'
     - Preparation: 'preparation/index.md'
