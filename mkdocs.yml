@@ -20,6 +20,7 @@ nav:
     - Installing:
       - platform-external/installing/agnostic.md
       - platform-external/installing/capi.md
+      - platform-external/installing/capi-ref-image-aws.md
     - platform-external/components.md
     - platform-external/e2e-testing.md
   - Full integration:
