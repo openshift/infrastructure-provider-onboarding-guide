@@ -3,7 +3,7 @@
 All OpenShift components that are released from Red Hat will have accompanying
 documentation in the [OpenShift product documentation][ocp-docs]. The content
 for these product documents are created and maintained by Red Hat, but they
-are inspired by the [OpenShift enhancement](../openshift-enhancement),
+are inspired by the [OpenShift enhancement](../openshift-enhancement/index.md),
 repository level documentation, and direct discussions with the component
 engineers.
 

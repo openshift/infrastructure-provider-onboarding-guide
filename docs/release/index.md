@@ -108,7 +108,7 @@ has arrived at this process, please see the following articles:
 
 
 [semver]: https://semver.org/spec/v2.0.0.html
-[ci]: ../continuous-integration-and-testing
+[ci]: ../continuous-integration-and-testing/index.md
 [lifecycle]: https://access.redhat.com/support/policy/updates/openshift/
 [blog1]: https://cloud.redhat.com/blog/time-is-on-your-side-a-change-to-the-openshift-4-lifecycle
 [blog2]: https://cloud.redhat.com/blog/the-ultimate-guide-to-openshift-release-and-upgrade-process-for-cluster-administrators

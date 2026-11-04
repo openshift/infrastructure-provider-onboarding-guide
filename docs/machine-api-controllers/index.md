@@ -213,7 +213,7 @@ provider is `machine-api-provider-aws`.
 
 The repository will need to be copied into the OpenShift organization.
 This process is described in more detail in the
-[Creating a GitHub Repository in the OpenShift Organization](../procedures/creating-an-openshift-repository)
+[Creating a GitHub Repository in the OpenShift Organization](../procedures/creating-an-openshift-repository.md)
 document.
 
 Having the source code in the OpenShift organization will allow Red Hat's continuous
@@ -224,7 +224,7 @@ the official releases.
 
 After setting up the code repository, there are several continuous integration
 tasks which must be done. This process is described in more detail in the
-[Configuring Basic Repository Integrations](../procedures/configuring-repository-integrations)
+[Configuring Basic Repository Integrations](../procedures/configuring-repository-integrations.md)
 document.
 
 As an example, here is the pull request to add the MAPI provider for IBM Cloud to the
