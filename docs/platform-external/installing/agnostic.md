@@ -736,4 +736,4 @@ If you have issues, you can start exploring the [Throubleshooting Installations 
 ## Next steps
 
 - [Validating an installation](https://docs.openshift.com/container-platform/4.13/installing/validating-an-installation.html#validating-an-installation)
-- [Running conformance tests in non-integrated providers](./e2e-testing.md)
+- [Running conformance tests in non-integrated providers](../e2e-testing.md)

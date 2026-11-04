@@ -17,8 +17,13 @@ nav:
   - Welcome: index.md
   - Platform External:
     - platform-external/index.md
-    - platform-external/installing.md
+    - Installing:
+      - platform-external/installing/agnostic.md
+      - platform-external/installing/capi.md
+      - platform-external/installing/capi-ref-image-aws.md
+    - platform-external/components.md
     - platform-external/e2e-testing.md
+    - platform-external/troubleshooting.md
   - Full integration:
     - 'overview.md'
     - Preparation: 'preparation/index.md'
