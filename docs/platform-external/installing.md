@@ -2,7 +2,7 @@
 
 The steps to install an OpenShift cluster with a platform type external inherits from
 the guidance and infrastructure requirements of the "agnostic installation"
-method from the official documentation ["Installing a cluster on any platform"](https://docs.openshift.com/container-platform/4.13/installing/installing_platform_agnostic/installing-platform-agnostic.html).
+method from the official documentation ["Installing a cluster on any platform"](https://docs.openshift.com/container-platform/latest/installing/installing_platform_agnostic/installing-platform-agnostic.html).
 
 This method is a fully customized path, allowing the users to config
 a cluster using `openshift-installer`, creating the infrastructure using
@@ -151,7 +151,7 @@ provider's CCM to check the appropriate value.
 
 In OpenShift it is possible to set a dynamic value of `${KUBELET_PROVIDERID}`
 can be set on each node using the
-[MachineConfiguration](https://docs.openshift.com/container-platform/4.13/rest_api/machine_apis/machineconfig-machineconfiguration-openshift-io-v1.html).
+[MachineConfiguration](https://docs.openshift.com/container-platform/latest/rest_api/machine_apis/machineconfig-machineconfiguration-openshift-io-v1.html).
 
 The example below shows how to create a `MachineConfig` to retrieve the provider's
 ID from the Instance/VM Metadata service, setting it to the syntax required by
@@ -262,9 +262,9 @@ The following examples show how to customize and automate the infrastructure cre
 without `openshift-install` automation (non-IPI), allowing highly-customized infrastructure
 deployments by the end-user:
 
-- [AWS CloudFormation Templates](https://github.com/openshift/installer/tree/master/upi/aws/cloudformation) for [AWS UPI](https://docs.openshift.com/container-platform/4.13/installing/installing_aws/installing-aws-user-infra.html)
-- [Azure ARM Templates](https://github.com/openshift/installer/tree/master/upi/azure) for [Azure UPI](https://docs.openshift.com/container-platform/4.13/installing/installing_azure/installing-azure-user-infra.html)
-- [Ansible Playbooks](https://github.com/openshift/installer/tree/master/upi/openstack) for [OpenStack UPI](https://docs.openshift.com/container-platform/4.13/installing/installing_openstack/installing-openstack-user-kuryr.html)
+- [AWS CloudFormation Templates](https://github.com/openshift/installer/tree/master/upi/aws/cloudformation) for [AWS UPI](https://docs.openshift.com/container-platform/latest/installing/installing_aws/installing-aws-user-infra.html)
+- [Azure ARM Templates](https://github.com/openshift/installer/tree/master/upi/azure) for [Azure UPI](https://docs.openshift.com/container-platform/latest/installing/installing_azure/installing-azure-user-infra.html)
+- [Ansible Playbooks](https://github.com/openshift/installer/tree/master/upi/openstack) for [OpenStack UPI](https://docs.openshift.com/container-platform/latest/installing/installing_openstack/installing-openstack-user-kuryr.html)
 
 The following sub-sections provide guidance referencing the OpenShift documentation
 for the infrastructure components required to deploy a cluster.
@@ -285,7 +285,7 @@ authentication method, or short-lived tokens, when providing credentials to comp
 
 There is no specific configuration for the platform external when deploying network components.
 
-See the [Networking requirements for user-provisioned infrastructure](https://docs.openshift.com/container-platform/4.13/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-network-user-infra_installing-platform-agnostic)
+See the [Networking requirements for user-provisioned infrastructure](https://docs.openshift.com/container-platform/latest/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-network-user-infra_installing-platform-agnostic)
 for details of the deployment requirements for OpenShift.
 
 In production environments, it is recommended to deploy OpenShift control plane nodes
@@ -305,8 +305,8 @@ Please take a look at the following guides for the DNS setup:
 - [User-provisioned DNS requirements][upi-dns-requirements]
 - [Validating DNS resolution for user-provisioned infrastructure][upi-dns-validating]
 
-[upi-dns-requirements]: https://docs.openshift.com/container-platform/4.13/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-dns-user-infra_installing-platform-agnostic
-[upi-dns-validating]: https://docs.openshift.com/container-platform/4.13/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-user-provisioned-validating-dns_installing-platform-agnostic
+[upi-dns-requirements]: https://docs.openshift.com/container-platform/latest/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-dns-user-infra_installing-platform-agnostic
+[upi-dns-validating]: https://docs.openshift.com/container-platform/latest/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-user-provisioned-validating-dns_installing-platform-agnostic
 
 ### Load Balancers
 
@@ -338,7 +338,7 @@ Furthermore, the Red Hat CoreOS (RHCOS) image must be uploaded to the related cl
 Requirements:
 
 - You created the ignition configs
-- You reviewed the ["Minimum resource requirements for cluster installation"](https://docs.openshift.com/container-platform/4.13/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-minimum-resource-requirements_installing-platform-agnostic)
+- You reviewed the ["Minimum resource requirements for cluster installation"](https://docs.openshift.com/container-platform/latest/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-minimum-resource-requirements_installing-platform-agnostic)
 
 #### Upload the RHCOS image
 
@@ -666,9 +666,9 @@ by the user, and lately automated by the provider.
 
 See the references on how to approve it:
 
-- [Certificate signing requests management](https://docs.openshift.com/container-platform/4.13/installing/installing_platform_agnostic/installing-platform-agnostic.html#csr-management_installing-platform-agnostic)
+- [Certificate signing requests management](https://docs.openshift.com/container-platform/latest/installing/installing_platform_agnostic/installing-platform-agnostic.html#csr-management_installing-platform-agnostic)
 
-- [Approving the certificate signing requests for your machines](https://docs.openshift.com/container-platform/4.13/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-approve-csrs_installing-platform-agnostic)
+- [Approving the certificate signing requests for your machines](https://docs.openshift.com/container-platform/latest/installing/installing_platform_agnostic/installing-platform-agnostic.html#installation-approve-csrs_installing-platform-agnostic)
 
 Check the pending certificates using `oc get csr -w`, then approve those by running the command:
 
@@ -731,9 +731,9 @@ oc adm wait-for-stable-cluster
 
 The cluster will be ready to use once the operators are stabilized.
 
-If you have issues, you can start exploring the [Throubleshooting Installations page](https://docs.openshift.com/container-platform/4.13/support/troubleshooting/troubleshooting-installations.html).
+If you have issues, you can start exploring the [Throubleshooting Installations page](https://docs.openshift.com/container-platform/latest/support/troubleshooting/troubleshooting-installations.html).
 
 ## Next steps
 
-- [Validating an installation](https://docs.openshift.com/container-platform/4.13/installing/validating-an-installation.html#validating-an-installation)
+- [Validating an installation](https://docs.openshift.com/container-platform/latest/installing/validating-an-installation.html#validating-an-installation)
 - [Running conformance tests in non-integrated providers](./e2e-testing.md)
