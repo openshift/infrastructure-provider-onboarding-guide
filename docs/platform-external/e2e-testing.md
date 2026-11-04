@@ -3,7 +3,7 @@
 After the OpenShift/OKD cluster has been installed, you want to run OpenShift conformance
 tests (e2e) to validate OpenShift core components.
 
-The Continuous Integration (CI) testing for OpenShift and its supported infrastructure providers is handled through Prow; the same system used for the Kubernetes project. You can read more in the guide for [Continuous Integration and Testing](../continuous-integration-and-testing).
+The Continuous Integration (CI) testing for OpenShift and its supported infrastructure providers is handled through Prow; the same system used for the Kubernetes project. You can read more in the guide for [Continuous Integration and Testing](../continuous-integration-and-testing/index.md).
 
 For non-integrated providers, or when the provider is looking to run a small set of tests,
 it is possible to achieve this with the following tools:

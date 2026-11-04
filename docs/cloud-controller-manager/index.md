@@ -11,7 +11,7 @@ as a starting point.
 
 One of the first things to do is copy the source code into the OpenShift organization
 on GitHub. This process is described in more detail in the
-[Creating a GitHub Repository in the OpenShift Organization](../procedures/creating-an-openshift-repository)
+[Creating a GitHub Repository in the OpenShift Organization](../procedures/creating-an-openshift-repository.md)
 document.
 
 Having the source code in the OpenShift organization will allow Red Hat's continuous
@@ -22,7 +22,7 @@ the official releases.
 
 After setting up the code repository, there are several continuous integration
 tasks which must be done. This process is described in more detail in the
-[Configuring Basic Repository Integrations](../procedures/configuring-repository-integrations)
+[Configuring Basic Repository Integrations](../procedures/configuring-repository-integrations.md)
 document.
 
 As an example, here is the pull request to add the CCM for Alibaba Cloud to the
